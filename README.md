@@ -1,5 +1,7 @@
 # Kafka Essentials
 
+![kafka_logo](https://kafka.apache.org/images/logo.png)
+
 Criado pelo Linkedin em 2011, o [Apache Kafka](https://kafka.apache.org/) é uma plataforma de streaming distribuída mundialmente conhecida por sua performance e escalabilidade. Atualmente, tem sido utilizado por grandes empresas como *Netflix, Spotify, Uber e Twitter*.
 
 A página oficial da plataforma descreve três recursos principais:
