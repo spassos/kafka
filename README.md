@@ -45,6 +45,7 @@ A [Admin API](https://kafka.apache.org/documentation.html#adminapi) permite gere
 
 
 ![fluxo_kafka](https://kafka.apache.org/25/images/kafka-apis.png)
+
 *fonte: <https://kafka.apache.org>*
 
 ## Tópicos e Logs
@@ -56,6 +57,7 @@ Um tópico é um nome de categoria ou feed no qual os registros são publicados.
 Para cada tópico, o cluster Kafka mantém um log particionado semelhante a este:
 
 ![topico_flow](https://kafka.apache.org/25/images/log_anatomy.png)
+
 *fonte: <https://kafka.apache.org>*
 
 
@@ -64,6 +66,7 @@ Cada partição é uma sequência imutável e ordenada de registros que é conti
 O cluster Kafka persiste de maneira duradoura em todos os registros publicados - tenham ou não sido consumidos - usando um período de retenção configurável. Por exemplo, se a política de retenção for definida como dois dias, nos dois dias após a publicação de um registro, ela estará disponível para consumo, após o que será descartada para liberar espaço. O desempenho do Kafka é efetivamente constante em relação ao tamanho dos dados, portanto, armazenar dados por um longo tempo não é um problema.
 
 ![offset_flow](https://kafka.apache.org/25/images/log_consumer.png)
+
 *fonte: <https://kafka.apache.org>*
 
 De fato, os únicos metadados retidos por consumidor são a compensação ou a posição desse consumidor no log. Essa compensação é controlada pelo consumidor: normalmente um consumidor avançará sua compensação linearmente enquanto lê registros, mas, de fato, como a posição é controlada pelo consumidor, pode consumir registros em qualquer ordem que desejar. Por exemplo, um consumidor pode redefinir para um deslocamento mais antigo para reprocessar dados do passado ou pular para o registro mais recente e começar a consumir "agora".
@@ -87,6 +90,7 @@ Se todas as instâncias do consumidor tiverem o mesmo grupo de consumidores, os 
 Se todas as instâncias do consumidor tiverem grupos de consumidores diferentes, cada registro será transmitido para todos os processos do consumidor.
 
 ![consumer_flow](https://kafka.apache.org/25/images/consumer-groups.png)
+
 *fonte: <https://kafka.apache.org>*
 
 Um cluster Kafka de dois servidores que hospeda quatro partições (P0-P3) com dois grupos de consumidores. O grupo de consumidores A tem duas instâncias de consumo e o grupo B tem quatro.
