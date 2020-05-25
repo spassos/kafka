@@ -56,7 +56,7 @@ if __name__ == '__main__':
     #       will most likely not serve the delivery callback for the
     #       last produce()d message.
     p.poll(0)
-
+    
     # Wait until all messages have been delivered
     sys.stderr.write('%% Waiting for %d deliveries\n' % len(p))
     p.flush()

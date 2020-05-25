@@ -23,8 +23,95 @@ Vamos definir brevemente alguns termos que são constantemente utilizados quando
 
 ![fluxo_kafka](https://miro.medium.com/max/1400/1*qYGIdHktRtQsaGwz11XSOA.png)
 
-## Principais comandos
 
+## Instalação do Kafka
+
+### Linux
+
+1 - Atualizar o SO:
+
+```sh
+sudo apt update
+```
+
+2 - Instalar o JDK 8:
+
+```sh
+sudo apt install openjdk-8-jdk
+```
+
+3 - Verificar se a instalação ocorreu com sucesso:
+
+```sh
+java -version
+```
+
+4 - Baixar os binários do Kafka, neste [link](https://kafka.apache.org/downloads).
+
+5 - Descompactar os binários:
+
+```sh
+tar -xvf kafka_2.12-2.5.0.tgz
+```
+
+6 - Renomear e mover a pasta para o caminho `~`
+
+```sh
+mv kafka_2.12-2.5.0 kafka
+mv kafka/ ~
+```
+
+7 - Editar o arquivo `.bashrc` para reconhecer os comandos utilizados no Kafka como por exemplo o `kafka-topics.sh`
+
+```sh
+gedit .bashrc
+```
+
+Incluir no final do arquivo `.bashrc`
+```sh
+export PATH=/home/seu_nome_usuario/kafka/bin:$PATH
+```
+
+8 - Acessar o diretório do kafka e incluir as pastas `data/kafka` e `data/zookeeper`. São nesses diretórios que o Apache Kafka armaneza os dados dos tópicos e logs. 
+
+```sh
+cd kafka/
+mkdir data
+cd data
+mkdir kafka
+mkdir zookeeper
+```
+
+9 - Editar o arquivo `zookeeper.properties` e alterar o parâmetro dataDir para `/home/seu_usuario/kafka/data/zookeeper` e salvar as alteração:
+
+```sh
+cd kafka/config
+gedit zookeeper.properties
+```
+
+10 - Editar o arquivo `server.properties`e alterar o parâmetro log.dirs para `/home/seu_usuario/kafka/data/kafka` e salvar as alterações
+
+```sh
+cd kafka/config
+gedit server.properties
+```
+
+11 - Subir os serviços Zookeeper e Kafka:
+
+```sh
+zookeeper-server-start.sh /home/seu_usuario/kafka/confi/zookeeper.properties
+
+kafka-server-start.sh /home/seu_usuario/kafka/confi/server.properties
+```
+### Docker
+
+Acessar o diretório com o arquivo `docker-compose.yml` e executar o comanado abaixo:
+
+```sh
+docker-compose up -d
+```
+
+## Principais comandos
 
 ### Listar todos os tópicos do Kafka
 ```sh
