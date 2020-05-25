@@ -217,6 +217,7 @@ docker-compose up -d
 
 <https://docs.confluent.io/current/installation/operator/index.html>
 
+
 ## Principais comandos
 
 ### Listar todos os tópicos do Kafka
@@ -264,3 +265,13 @@ kafka-console-consumer.sh —-bootstrap-server localhost:9092 —-topic <nome_to
 ```sh
 kafka-console-consumer.sh —-bootstrap-server localhost:9092 —-topic <nome_topico> --group <nome_grupo>
 ```
+
+
+Abaixo seguem alguns links que utilizei neste post:
+Kafka documentation
+
+https://www.confluent.io/press-release/confluent-grows-subscriptions-700-percent-2016-businesses-seize-power-real-time-data/
+
+https://kafka.apache.org/powered-by
+
+https://kafka.apache.org/intro
