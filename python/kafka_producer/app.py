@@ -1,5 +1,10 @@
 from confluent_kafka import Producer
 import sys
+from faker import Faker
+from model.conta import Conta
+from serializer.class_serializer import ClassEncoder
+import json
+import uuid
 
 if __name__ == '__main__':
 
@@ -15,20 +20,22 @@ if __name__ == '__main__':
     # failed delivery (after retries).
     def delivery_callback(err, msg):
         if err:
-            sys.stderr.write('%% Message failed delivery: %s\n' % err)
+            print('Message failed delivery {0}'.format(0))
         else:
-            sys.stderr.write('%% Message delivered to %s [%d] @ %d\n' %
-                             (msg.topic(), msg.partition(), msg.offset()))
+            print('Message delivered to {0} [{1}] @ {2}'.format(msg.topic(), msg.partition(), msg.offset()))
 
     # Read lines from stdin, produce each line to Kafka
     try:
-        # Produce line (without newline)
-        p.produce('topico-demo-python', 'mensagem teste', callback=delivery_callback)
+        faker = Faker(['pt-BR'])
+        c = Conta(cliente = faker.name(), agencia = 1, conta=faker.random_number(digits=10), data_abertura=faker.date(),
+                  saldo=50.0, ativo=True)
+        message =  json.dumps(c.repr_json(), cls=ClassEncoder).encode('utf-8')
+        key = str(uuid.uuid4())
+
+        p.produce('topico-demo-python', key=key, value=message, callback=delivery_callback)
 
     except BufferError:
-        sys.stderr.write('%% Local producer queue is full (%d messages awaiting delivery): try again\n' %
-                            len(p))
-
+        print('Local producer queue is full ({0} messages awaiting delivery): try again.'.format(len(p)))
     # Serve delivery callback queue.
     # NOTE: Since produce() is an asynchronous API this poll() call
     #       will most likely not serve the delivery callback for the
@@ -36,5 +43,5 @@ if __name__ == '__main__':
     p.poll(0)
 
     # Wait until all messages have been delivered
-    sys.stderr.write('%% Waiting for %d deliveries\n' % len(p))
+    print('Waiting for {0} deliveries.'.format(len(p)))
     p.flush()
